@@ -10,13 +10,4 @@
     <ProjectReference Include="..\Abstraction Layer\ServiceAbstraction.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Data\Configuration classes\" />
-    <Folder Include="Data\Contexts\" />
-    <Folder Include="Data\DataSeed\" />
-    <Folder Include="Migrations\" />
-    <Folder Include="Identity\" />
-    <Folder Include="Repositories\" />
-  </ItemGroup>
-
 </Project>

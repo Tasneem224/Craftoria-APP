@@ -20,10 +20,4 @@
     <ProjectReference Include="..\Presistence\Presistence.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Custome Middlewares\" />
-    <Folder Include="Extensions\" />
-    <Folder Include="Factories\" />
-  </ItemGroup>
-
 </Project>

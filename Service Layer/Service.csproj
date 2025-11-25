@@ -17,10 +17,6 @@
     <ProjectReference Include="..\Abstraction Layer\ServiceAbstraction.csproj" />
     <ProjectReference Include="..\Core\Domian Layer\Domian Layer.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Mapping Profiles\" />
-  </ItemGroup>
 		
  
 	
