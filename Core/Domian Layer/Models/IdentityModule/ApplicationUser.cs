@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace Domian_Layer.Models.IdentityModule
 {
     public class ApplicationUser:IdentityUser
+
     {
         public string FirstName { get; set; } = default!;
         public string SecondName { get; set; } = default!;

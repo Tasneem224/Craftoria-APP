@@ -1,4 +1,10 @@
 
+using Domian_Layer.Models.IdentityModule;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Presistence.Data.Contexts;
+
 namespace Craftoria_APP
 {
     public class Program
@@ -13,6 +19,15 @@ namespace Craftoria_APP
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddDbContext<StoreDbContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("Connection"));
+
+            });
+           
+            builder.Services.AddIdentityCore<ApplicationUser>()
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<StoreDbContext>();
 
             var app = builder.Build();
 
