@@ -140,5 +140,26 @@ namespace Service_Layer
 
         }
 
+        public async Task<ReturnUserDTO> LoginAsync(LoginDTO loginDto)
+        {
+            var user = await _userManager.FindByEmailAsync(loginDto.Email);
+            if (user is null)
+            {
+                throw new UserNotFoundException(loginDto.Email);
+            }
+            //Check passwords match
+            var checkPassword = await _userManager.CheckPasswordAsync(user, loginDto.Password);
+            if (checkPassword)
+            {
+                return new ReturnUserDTO
+                {
+                    Email = user.Email,
+                    UserName = user.DisplayName,
+                    Token = await CreateTokenAsync(user)
+
+                };
+            }
+            throw new UnauthorizedAException();
+        }
     }
 }

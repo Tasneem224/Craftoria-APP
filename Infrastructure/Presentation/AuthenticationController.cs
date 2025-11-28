@@ -30,6 +30,24 @@ namespace Presentation
                 return SendErrorResponse(ex.Message, null, 400);
             }
         }
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login(LoginDTO loginDTO)
+        {
+            if (!ModelState.IsValid)
+            {
+                return SendErrorResponse("Validation failed", ModelState, 422);
+            }
+            try
+            {
+                var user = await _serviceManager.AuthenticationService.LoginAsync(loginDTO);
+
+                return SendSuccessResponse(user, "Login  successful");
+            }
+            catch (Exception ex)
+            {
+                return SendErrorResponse(ex.Message, null, 400);
+            }
+        }
 
     }
 }
