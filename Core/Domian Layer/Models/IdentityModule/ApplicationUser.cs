@@ -10,6 +10,8 @@ namespace Domian_Layer.Models.IdentityModule
     public class ApplicationUser:IdentityUser
 
     {
+
+        public string DisplayName { get; set; } = default!;
         public string FirstName { get; set; } = default!;
         public string SecondName { get; set; } = default!;
         public Gender Gender { get; set; } = default!;
@@ -24,7 +26,6 @@ namespace Domian_Layer.Models.IdentityModule
 
         #region Expert_artisan
         public string? Portfolio { get; set; }
-        public string? CV { get; set; }
         public int? YearsOfExperience { get; set; }
         #endregion
     }
