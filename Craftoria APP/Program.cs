@@ -28,10 +28,16 @@ namespace Craftoria_APP
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<StoreDbContext>(options =>
             {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("Connection"));
-
+                options.UseSqlServer(
+                    builder.Configuration.GetConnectionString("Connection"),
+                    sqlOptions => sqlOptions.EnableRetryOnFailure(
+                        maxRetryCount: 5,
+                        maxRetryDelay: TimeSpan.FromSeconds(10),
+                        errorNumbersToAdd: null
+                    )
+                );
             });
-           
+
             builder.Services.AddIdentityCore<ApplicationUser>()
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<StoreDbContext>();
@@ -49,14 +55,14 @@ namespace Craftoria_APP
                 await seeder.IdentityDataSeedingAsync();
             }
 
-            // Configure the HTTP request pipeline.
+            //Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
-            }
+        }
 
-            app.UseHttpsRedirection();
+        app.UseHttpsRedirection();
 
             app.UseAuthorization();
 

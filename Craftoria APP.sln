@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36429.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Craftoria APP", "Craftoria APP\Craftoria APP.csproj", "{E34128EC-A0D6-4CC7-B9AD-812FA3375747}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CraftoriaAPP", "Craftoria APP\CraftoriaAPP.csproj", "{E34128EC-A0D6-4CC7-B9AD-812FA3375747}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domian Layer", "Core\Domian Layer\Domian Layer.csproj", "{2E789590-3BD7-41BC-AF14-A49E5B540B3E}"
 EndProject
