@@ -1,6 +1,8 @@
 ﻿using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +15,14 @@ namespace Service_Layer
     {
         private readonly Cloudinary _cloudinary;
 
-        public CloudinaryService()
+        public CloudinaryService(IConfiguration config)
         {
-            var cloudUrl = Environment.GetEnvironmentVariable("CLOUDINARY_URL");
-            _cloudinary = new Cloudinary(cloudUrl);
+            
+
+            var cloudinaryUrl = config["Cloudinary:CloudinaryUrl"];
+            //var cloudinaryUrl = builder.Configuration["Cloudinary:CloudinaryUrl"];
+            //var cloudUrl = Environment.GetEnvironmentVariable("CLOUDINARY_URL");
+            _cloudinary = new Cloudinary(cloudinaryUrl);
             _cloudinary.Api.Secure = true;
         }
 

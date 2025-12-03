@@ -3,14 +3,12 @@ using Abstraction_Layer;
 using CloudinaryDotNet;
 using Domian_Layer.Contracts;
 using Domian_Layer.Models.IdentityModule;
-using dotenv.net;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Persistence.Repositories;
 using Presistence.Data.Contexts;
+using Scalar.AspNetCore;
 using Service_Layer;
-using System.Threading.Tasks;
 
 namespace Craftoria_APP
 {
@@ -42,8 +40,10 @@ namespace Craftoria_APP
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<StoreDbContext>();
             builder.Services.AddScoped<IServiceManager, ServiceManager>();
-            DotEnv.Load(options: new DotEnvOptions(probeForEnv: true));
-            Cloudinary cloudinary = new Cloudinary(Environment.GetEnvironmentVariable("CLOUDINARY_URL"));
+
+
+            var cloudinaryUrl = builder.Configuration["Cloudinary:CloudinaryUrl"];
+            Cloudinary cloudinary = new Cloudinary(cloudinaryUrl);
             builder.Services.AddScoped<ICloudinaryService, CloudinaryService>();
             builder.Services.AddScoped<IDataSeeding, DataSeeding>();
 
@@ -60,9 +60,21 @@ namespace Craftoria_APP
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
-        }
+            }
+            else
+            {
+                app.UseSwagger();
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("/swagger/v1/swagger.json","Production");
+                options.RoutePrefix = string.Empty;
+            });
 
-        app.UseHttpsRedirection();
+            }
+                    //}
+
+
+            app.UseHttpsRedirection();
 
             app.UseAuthorization();
 

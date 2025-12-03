@@ -1,21 +1,20 @@
 ﻿using Abstraction_Layer;
+
 using Domian_Layer.Exceptions;
 using Domian_Layer.Models.IdentityModule;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Shared;
-using System;
-using System.Collections.Generic;
+using Shared.Identity_Module;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Service_Layer
 {
-    public class AuthenticationService(UserManager<ApplicationUser> _userManager, IConfiguration _configuration,ICloudinaryService _cloudinary) : IAuthenticationService
+    public class AuthenticationService(UserManager<ApplicationUser> _userManager, IConfiguration _configuration, ICloudinaryService _cloudinary) : IAuthenticationService
     {
 
 
@@ -49,8 +48,8 @@ namespace Service_Layer
                     ProfileImage = profileImagePath,
                     Portfolio = portfolioPath,
                     Gender = (Gender)Enum.Parse(typeof(Gender), gender),
-                    YearsOfExperience=_registerDto.YearsOfExperience
-                    
+                    YearsOfExperience = _registerDto.YearsOfExperience
+
                 };
 
                 var result = await _userManager.CreateAsync(newUser, _registerDto.Password);
@@ -77,12 +76,12 @@ namespace Service_Layer
 
                 if (profileImagePath is not null)
                 {
-                     _cloudinary.DeleteAsync(profileImagePath);
+                    _cloudinary.DeleteAsync(profileImagePath);
                 }
 
                 if (portfolioPath is not null)
                 {
-                     _cloudinary.DeleteAsync(portfolioPath);
+                    _cloudinary.DeleteAsync(portfolioPath);
                 }
 
                 throw;
@@ -99,7 +98,7 @@ namespace Service_Layer
             if (_registerDto.Role == RoleType.Expert)
             {
 
-              
+
                 if (_registerDto.Portfolio is null)
                 {
                     throw new BadRequestException(new List<string> { "Expert registration requires Portfolio." });
@@ -161,5 +160,8 @@ namespace Service_Layer
             }
             throw new UnauthorizedAException();
         }
+
+
+
     }
 }

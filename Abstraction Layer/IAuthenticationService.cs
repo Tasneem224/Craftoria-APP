@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Shared.Identity_Module;
 namespace Abstraction_Layer
 {
     public interface IAuthenticationService
