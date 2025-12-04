@@ -28,6 +28,7 @@ namespace Presistence.Data.Contexts
             builder.Ignore<IdentityUserLogin<string>>();
             builder.Ignore<IdentityRoleClaim<string>>();
 
+
             builder.ApplyConfigurationsFromAssembly(typeof(Reference_Assembly).Assembly);
 
         }
