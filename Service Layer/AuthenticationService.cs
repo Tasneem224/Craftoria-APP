@@ -16,8 +16,6 @@ namespace Service_Layer
 {
     public class AuthenticationService(UserManager<ApplicationUser> _userManager, IConfiguration _configuration, ICloudinaryService _cloudinary) : IAuthenticationService
     {
-
-
         public async Task<ReturnUserDTO> RegisterAsync(RegisterDto _registerDto)
         {
             string? profileImagePath = null;

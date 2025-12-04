@@ -31,6 +31,7 @@ namespace Presistence.Data.Contexts
             builder.ApplyConfigurationsFromAssembly(typeof(Reference_Assembly).Assembly);
 
         }
+
     }
 
 }
